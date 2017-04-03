@@ -33,7 +33,8 @@ defmodule Mix.Tasks.UnmbrellaHex do
       System.cmd("mix", ["deps.get"]) # Mix.Tasks.Deps.Get.run(argv)
       System.cmd("mix", ["deps.compile"]) # Mix.Tasks.Deps.Compile.run(argv)
       System.cmd("mix", ["compile"]) # Mix.Tasks.Compile.run(argv)
-      System.cmd("mix", ["hex.publish"]) # Mix.Tasks.Hex.Publish.run(argv)
+      System.cmd("mix", ["hex.build"]) # Mix.Tasks.Hex.Publish.run(argv)
+      IO.puts "Check the errors above; if none, do ⇒ cd #{@build_dir} && mix hex.publish"
     end)
   end
 end
