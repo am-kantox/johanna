@@ -31,10 +31,10 @@ defmodule Mix.Tasks.UnmbrellaHex do
 
     File.cd!(@build_dir, fn ->
       spawn(fn ->
-        Mix.Tasks.Deps.Get.run(argv)
-        Mix.Tasks.Deps.Compile.run(argv)
-        Mix.Tasks.Compile.run(argv)
-        Mix.Tasks.Hex.Publish.run(argv)
+        System.cmd("mix", ["deps.get"]) # Mix.Tasks.Deps.Get.run(argv)
+        System.cmd("mix", ["deps.compile"]) # Mix.Tasks.Deps.Compile.run(argv)
+        System.cmd("mix", ["compile"]) # Mix.Tasks.Compile.run(argv)
+        System.cmd("mix", ["hex.publish"]) # Mix.Tasks.Hex.Publish.run(argv)
       end)
     end)
   end

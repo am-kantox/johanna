@@ -31,6 +31,9 @@ defmodule Johanna do
   def at(time, fun) when is_function(fun, 0) do
     erl_at(time, fn _, _ -> fun.() end)
   end
+  def at(time, fun) when is_tuple(fun) do
+    erl_at(time, fun)
+  end
 
   @spec once(:erlcron.cron_time() | :erlcron.seconds() | DateTime.t, fun) :: :erlcron.job_ref()
   def once(%DateTime{} = time, fun) when is_function(fun, 0) do
@@ -40,6 +43,9 @@ defmodule Johanna do
   end
   def once(time, fun) when is_function(fun, 0) do
     erl_once(time, fn _, _ -> fun.() end)
+  end
+  def once(time, fun) when is_tuple(fun) do
+    erl_once(time, fun)
   end
 
   @spec datetime() :: DateTime.t
