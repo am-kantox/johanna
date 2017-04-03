@@ -137,6 +137,23 @@ defmodule Johanna do
   def cron(job), do: erl_cron(job)
 
   @doc """
+  Replaces the job identified by reference (by cancelling the old one and
+    placing the new one with the same reference).
+
+  ## Examples
+
+      ▶ ref = Johanna.at {7, :pm}, {IO, :puts, ["Yay"]}
+      ▷ #Reference<0.0.5.28>
+      ▶ Johanna.replace ref, {{:daily, {7, :pm}}, {IO, :puts, ["Yay"]}}
+      ▷ #Reference<0.0.5.28>
+  """
+  @spec replace(:erlcron.job_ref(), :erlcron.job()) :: :erlcron.job_ref()
+  def replace(ref, job) when is_reference(ref) do
+    cancel!(ref)
+    :ecrn_cron_sup.add_job(ref, job)
+  end
+
+  @doc """
   Returns the `DateTime` instance, currently set for `erlcron`.
 
   ## Examples

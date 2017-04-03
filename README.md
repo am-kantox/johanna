@@ -23,6 +23,12 @@ Johanna.every(10, fn -> IO.puts("¡Yay!") end)
 Johanna.every({10, :sec}, fn -> IO.puts("¡Yay!") end) # same as above
 Johanna.every({1, :min}, {IO, :puts, ["¡Yay!"]}) # `apply` notation
 Johanna.every({1, :hr}, {:between, {1, :pm}, {4, :pm}}, fn -> IO.puts("¡Siesta!") end)
+
+### Experimental:
+ref = Johanna.at {7, :pm}, {IO, :puts, ["Yay"]}
+#⇒ #Reference<0.0.5.28>
+Johanna.replace ref, {{:daily, {7, :pm}}, {IO, :puts, ["Yay"]}}
+#⇒ #Reference<0.0.5.28>
 ```
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
