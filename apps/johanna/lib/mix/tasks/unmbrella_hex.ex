@@ -7,7 +7,7 @@ defmodule Mix.Tasks.UnmbrellaHex do
   use Mix.Task
 
   @doc false
-  def run(argv) do
+  def run(_argv) do
     File.rm_rf!(@build_dir)
     File.mkdir!(@build_dir)
     File.cp_r!("apps/johanna/", @build_dir)
@@ -30,12 +30,10 @@ defmodule Mix.Tasks.UnmbrellaHex do
     File.write!(mix_file, mix_content)
 
     File.cd!(@build_dir, fn ->
-      spawn(fn ->
-        System.cmd("mix", ["deps.get"]) # Mix.Tasks.Deps.Get.run(argv)
-        System.cmd("mix", ["deps.compile"]) # Mix.Tasks.Deps.Compile.run(argv)
-        System.cmd("mix", ["compile"]) # Mix.Tasks.Compile.run(argv)
-        System.cmd("mix", ["hex.publish"]) # Mix.Tasks.Hex.Publish.run(argv)
-      end)
+      System.cmd("mix", ["deps.get"]) # Mix.Tasks.Deps.Get.run(argv)
+      System.cmd("mix", ["deps.compile"]) # Mix.Tasks.Deps.Compile.run(argv)
+      System.cmd("mix", ["compile"]) # Mix.Tasks.Compile.run(argv)
+      System.cmd("mix", ["hex.publish"]) # Mix.Tasks.Hex.Publish.run(argv)
     end)
   end
 end
