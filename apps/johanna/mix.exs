@@ -1,8 +1,10 @@
 defmodule Johanna.Mixfile do
   use Mix.Project
 
+  @app :johanna
+
   def project do
-    [app: :johanna,
+    [app: @app,
      version: "0.1.0",
      build_path: "../../_build",
      config_path: "../../config/config.exs",
@@ -11,30 +13,34 @@ defmodule Johanna.Mixfile do
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     description: description(),
+     package: package(),
      deps: deps()]
   end
 
   # Configuration for the OTP application
-  #
-  # Type "mix help compile.app" for more information
   def application do
-    # Specify extra applications you'll use from Erlang/Elixir
     [extra_applications: [:logger, :erlcron]]
   end
 
-  # Dependencies can be Hex packages:
-  #
-  #   {:my_dep, "~> 0.3.0"}
-  #
-  # Or git/path repositories:
-  #
-  #   {:my_dep, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
-  #
-  # To depend on another app inside the umbrella:
-  #
-  #   {:my_app, in_umbrella: true}
-  #
-  # Type "mix help deps" for more examples and options
+  defp description do
+    """
+    **The wrapper for `erlcron` to be used in Elixir projects.**
+
+    Original erlang library: https://github.com/erlware/erlcron
+    """
+  end
+
+  defp package do
+    [
+     name: @app,
+     files: ~w|apps mix.exs README.md|,
+     maintainers: ["Aleksei Matiushkin"],
+     licenses: ["MIT"],
+     links: %{"GitHub" => "https://github.com/am-kantox/johanna",
+              "Docs" => "https://hexdocs.pm/johanna"}]
+  end
+
   defp deps do
     [
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
