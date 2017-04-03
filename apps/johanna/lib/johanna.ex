@@ -57,7 +57,7 @@ defmodule Johanna do
       ▷ "¡Yay!"
   """
   @spec at(:erlcron.cron_time() | :erlcron.seconds() | Time.t, :erlcron.callable()) :: :erlcron.job_ref()
-  def at(%Time{} = time, fun) when is_function(fun, 0) do
+  def at(%Time{} = time, fun) when is_function(fun, 0) or is_tuple(fun) do
     time
     |> Time.to_erl()
     |> at(fun)
@@ -79,7 +79,7 @@ defmodule Johanna do
       ▷ "¡Yay!"
   """
   @spec once(:erlcron.cron_time() | :erlcron.seconds() | DateTime.t, :erlcron.callable()) :: :erlcron.job_ref()
-  def once(%DateTime{} = time, fun) when is_function(fun, 0) do
+  def once(%DateTime{} = time, fun) when is_function(fun, 0) or is_tuple(fun) do
     now = DateTime.to_unix(DateTime.utc_now)
     then = DateTime.to_unix(time)
     once(then - now, fun)
