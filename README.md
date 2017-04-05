@@ -1,6 +1,6 @@
 # Johanna
 
-[![Johanna Build Status](https://travis-ci.org/am-kantox/johanna.svg?branch=master)](https://travis-ci.org/am-kantox/johanna)  This project, orchestrating the processes and performing all the routine tasks to keep the environment clean and robust, is named after and dedicated to **Johanna**, to honor the best office manager I ever worked with.
+[![Johanna Build Status](https://travis-ci.org/am-kantox/johanna.svg?branch=master)](https://travis-ci.org/am-kantox/johanna) ⇒ This project, orchestrating the processes and performing all the routine tasks to keep the environment clean and robust, is named after and dedicated to **Johanna**, to honor the best office manager I ever worked with.
 
 ## Installation
 
