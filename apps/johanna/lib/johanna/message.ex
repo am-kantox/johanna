@@ -14,6 +14,9 @@ defmodule Johanna.Message do
     message: String.t,
     error: Exception.t,
 
+    attempts: [{DateTime.t, any}],
+    result: any,
+
     type: {:retry, Integer.t} | :log,
 
     bag: List.t}
@@ -26,11 +29,14 @@ defmodule Johanna.Message do
     :message,
     :error,
 
+    :attempts,
+    :result,
+
     :type,
 
     :bag]
 
-  @initial Enum.zip(@fields, [DateTime.utc_now(), {IO, :inspect, []}, nil, nil, :log, []])
+  @initial Enum.zip(@fields, [DateTime.utc_now(), {IO, :inspect, []}, nil, nil, [], nil, :log, []])
 
   @doc false
   def fields, do: @fields

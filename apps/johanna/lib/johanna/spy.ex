@@ -8,10 +8,6 @@ defmodule Johanna.Spy do
 
   use GenServer
 
-  @vomit Application.get_env(:johanna, :vomit, [at: {2, :pm}, to: nil])
-  @vomit_at @vomit[:at] || {2, :pm}
-  @vomit_to @vomit[:to] || nil
-
   @doc """
   Bulk-sends the accumulated messages to devops and cleans up the cache.
   """
@@ -53,7 +49,6 @@ defmodule Johanna.Spy do
 
   @doc false
   def start_link do
-    Johanna.at(@vomit_at, {Johanna.Spy, :vomit, []})
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
 
@@ -79,7 +74,7 @@ defmodule Johanna.Spy do
 
   @doc false
   def handle_cast(:vomit, state) do
-    case @vomit_to do
+    case Johanna.vomit[:to] do
       {mod, fun} -> apply(mod, fun, [state]) # FIXME catch/rescue
       _ -> :noop
     end
