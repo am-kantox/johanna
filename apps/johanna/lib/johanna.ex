@@ -41,7 +41,26 @@ defmodule Johanna do
           {io, fwrite, ["Fourth of the month!~n"]}}
   """
 
+  use Application
+
+  @vomit Application.get_env(:johanna, :vomit, [at: {2, :pm}, to: nil])
+  def vomit(), do: @vomit
+
   @always {:between, {0, :am}, {11, 59, :pm}}
+
+  def start(_type, _args) do
+    import Supervisor.Spec, warn: false
+
+    Johanna.at(vomit()[:at], {Johanna.Spy, :vomit, []})
+
+    children = [
+      worker(Johanna.Spy, []),
+      worker(Johanna.Service, []),
+    ]
+
+    opts = [strategy: :one_for_one, name: Johanna.Supervisor]
+    Supervisor.start_link(children, opts)
+  end
 
   @doc """
   Runs the given function recurrently at the time given.
