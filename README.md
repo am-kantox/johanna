@@ -1,6 +1,6 @@
 # Johanna
 
-This project, orchestrating the processes and performing all the routine tasks to keep the environment clean and robust, is named after and dedicated to **Johanna**, to honor the best office manager I ever worked with.
+[![Johanna Build Status](https://travis-ci.org/am-kantox/johanna.svg?branch=master)](https://travis-ci.org/am-kantox/johanna)  This project, orchestrating the processes and performing all the routine tasks to keep the environment clean and robust, is named after and dedicated to **Johanna**, to honor the best office manager I ever worked with.
 
 ## Installation
 
@@ -31,6 +31,9 @@ Johanna.replace ref, {{:daily, {7, :pm}}, {IO, :puts, ["Yay"]}}
 #⇒ #Reference<0.0.5.28>
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/johanna](https://hexdocs.pm/johanna).
+### Changelog
+
+#### 0.2.0 — added `Johanna.Spy` and `Johanna.Service`
+
+
+### [Documentation](https://hexdocs.pm/johanna).
