@@ -41,7 +41,20 @@ defmodule Johanna do
           {io, fwrite, ["Fourth of the month!~n"]}}
   """
 
+  use Application
+
   @always {:between, {0, :am}, {11, 59, :pm}}
+
+  def start(_type, _args) do
+    import Supervisor.Spec, warn: false
+
+    children = [
+      worker(Johanna.Spy, []),
+    ]
+
+    opts = [strategy: :one_for_one, name: Johanna.Supervisor]
+    Supervisor.start_link(children, opts)
+  end
 
   @doc """
   Runs the given function recurrently at the time given.
