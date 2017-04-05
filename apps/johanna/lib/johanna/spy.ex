@@ -74,7 +74,7 @@ defmodule Johanna.Spy do
 
   @doc false
   def handle_cast(:vomit, state) do
-    case Johanna.vomit[:to] do
+    case Johanna.vomit()[:to] do
       {mod, fun} -> apply(mod, fun, [state]) # FIXME catch/rescue
       _ -> :noop
     end

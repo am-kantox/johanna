@@ -51,7 +51,7 @@ defmodule Johanna do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
-    Johanna.at(vomit[:at], {Johanna.Spy, :vomit, []})
+    Johanna.at(vomit()[:at], {Johanna.Spy, :vomit, []})
 
     children = [
       worker(Johanna.Spy, []),
