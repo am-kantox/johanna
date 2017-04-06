@@ -5,7 +5,7 @@ defmodule Johanna.Mixfile do
 
   def project do
     [app: @app,
-     version: "0.2.4",
+     version: "0.2.5",
      build_path: "../../_build",
      config_path: "../../config/config.exs",
      deps_path: "../../deps",
@@ -34,7 +34,7 @@ defmodule Johanna.Mixfile do
   defp package do
     [
      name: @app,
-     files: ~w|lib src config mix.exs README.md|,
+     files: ~w|lib src erlcron.app config mix.exs README.md|,
      maintainers: ["Aleksei Matiushkin"],
      licenses: ["MIT"],
      links: %{"GitHub" => "https://github.com/am-kantox/johanna",
