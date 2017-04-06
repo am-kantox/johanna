@@ -51,6 +51,8 @@ defmodule Johanna do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
+    Application.start(:erlcron)
+
     children = [
       worker(Johanna.Spy, []),
       worker(Johanna.Service, []),
