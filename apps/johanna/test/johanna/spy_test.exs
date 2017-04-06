@@ -6,13 +6,15 @@ defmodule Johanna.Spy.Test do
   defp push(), do: Johanna.Spy.push! %Johanna.Message{message: "¡Yay!"}
   defp spy_checker(messages) do
     case messages do
-      [%Johanna.Message{} = msg] -> assert msg.message == "¡Yay!"
-      _ -> assert false
+      [%Johanna.Message{} = msg | _] -> assert msg.message == "¡Yay!"
+      other ->
+        IO.inspect(other, label: "Johanna.Spy#checker")
+        assert false
     end
   end
 
   setup do
-    {:ok, spy} = Johanna.Spy.start_link
+    spy = Process.whereis Johanna.Spy
     push()
     {:ok, spy: spy}
   end
@@ -26,12 +28,8 @@ defmodule Johanna.Spy.Test do
   end
 
   describe "Johanna.Spy.vomit/1" do
-    test "calls a callback", %{spy: _spy} do
-      Johanna.Spy
-      |> Process.whereis
-      |> Process.monitor
-      # Process.monitor(spy)
-
+    test "calls a callback", %{spy: spy} do
+      Process.monitor(spy)
       assert Johanna.Spy.spy() != []
       Johanna.Spy.vomit(fn messages -> spy_checker(messages) end)
       assert Johanna.Spy.spy() == []

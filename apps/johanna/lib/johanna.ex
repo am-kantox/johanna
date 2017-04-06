@@ -51,12 +51,12 @@ defmodule Johanna do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
-    Johanna.at(vomit()[:at], {Johanna.Spy, :vomit, []})
-
     children = [
       worker(Johanna.Spy, []),
       worker(Johanna.Service, []),
     ]
+
+    Johanna.at(vomit()[:at], {Johanna.Spy, :vomit, []})
 
     opts = [strategy: :one_for_one, name: Johanna.Supervisor]
     Supervisor.start_link(children, opts)
