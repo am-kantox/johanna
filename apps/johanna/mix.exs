@@ -20,7 +20,7 @@ defmodule Johanna.Mixfile do
 
   # Configuration for the OTP application
   def application do
-    [extra_applications: [:logger, :erlcron], mod: {Johanna, []}]
+    [extra_applications: [:ecrn_app], mod: {Johanna, []}]
   end
 
   defp description do
