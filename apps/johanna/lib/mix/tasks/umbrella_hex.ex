@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.UnmbrellaHex do
+defmodule Mix.Tasks.UmbrellaHex do
   @shortdoc  "Builds the package for hex.pm from Umbrella project"
   @moduledoc @shortdoc
 
@@ -12,9 +12,11 @@ defmodule Mix.Tasks.UnmbrellaHex do
     File.mkdir!(@build_dir)
     File.cp_r!("apps/johanna/", @build_dir)
 
+    File.cd!("apps/erlcron", fn -> System.cmd("make", []) end)
     erlcron = Path.join(@build_dir, "src")
     File.mkdir!(erlcron)
     File.cp_r!("apps/erlcron/src", erlcron)
+    File.cp!("apps/erlcron/ebin/erlcron.app", erlcron)
 
     mix_file = Path.join(@build_dir, "mix.exs")
     mix_content = mix_file
