@@ -16,7 +16,7 @@ defmodule Mix.Tasks.UmbrellaHex do
     erlcron = Path.join(@build_dir, "src")
     File.mkdir!(erlcron)
     File.cp_r!("apps/erlcron/src", erlcron)
-    File.cp!("apps/erlcron/ebin/erlcron.app", erlcron <> "/erlcron.app")
+    File.cp!("apps/erlcron/ebin/erlcron.app", @build_dir <> "/erlcron.app")
 
     mix_file = Path.join(@build_dir, "mix.exs")
     mix_content = mix_file
